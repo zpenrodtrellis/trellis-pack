@@ -9,6 +9,11 @@
                 <field name="product_id"/>
                 <field name="qty"/>
                 <field name="start_date"/>
+                <field name="veg_date"/>
+                <field name="flower_date"/>
+                <field name="harvest_date"/>
+                <field name="dry_date"/>
+                <field name="buck_date"/>
                 <field name="state"/>
                 <field name="mo_id"/>
             </list>
@@ -34,6 +39,11 @@
                         <field name="product_id"/>
                         <field name="qty"/>
                         <field name="start_date"/>
+                        <field name="veg_date" readonly="1"/>
+                        <field name="flower_date" readonly="1"/>
+                        <field name="harvest_date" readonly="1"/>
+                        <field name="dry_date" readonly="1"/>
+                        <field name="buck_date" readonly="1"/>
                         <field name="state" readonly="1"/>
                         <field name="mo_id" readonly="1"/>
                     </group>
@@ -47,7 +57,7 @@
         <field name="name">trellis.schedule.calendar</field>
         <field name="model">trellis.schedule</field>
         <field name="arch" type="xml">
-            <calendar string="Master Schedule" date_start="start_date">
+            <calendar string="Master Schedule" date_start="start_date" date_stop="harvest_date">
                 <field name="name"/>
                 <field name="product_id"/>
                 <field name="qty"/>
@@ -56,18 +66,17 @@
     </record>
 
     <!-- Gantt view -->
-<record id="view_trellis_schedule_gantt" model="ir.ui.view">
-    <field name="name">trellis.schedule.gantt</field>
-    <field name="model">trellis.schedule</field>
-    <field name="arch" type="xml">
-        <gantt string="Master Schedule" date_start="start_date" date_stop="start_date">
-            <field name="name"/>
-            <field name="product_id"/>
-            <field name="qty"/>
-        </gantt>
-    </field>
-</record>
-
+    <record id="view_trellis_schedule_gantt" model="ir.ui.view">
+        <field name="name">trellis.schedule.gantt</field>
+        <field name="model">trellis.schedule</field>
+        <field name="arch" type="xml">
+            <gantt string="Master Schedule" date_start="start_date" date_stop="harvest_date">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="qty"/>
+            </gantt>
+        </field>
+    </record>
 
     <!-- Action + Menu -->
     <record id="trellis_schedule_action" model="ir.actions.act_window">
