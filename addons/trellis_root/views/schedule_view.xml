@@ -40,13 +40,13 @@
                     <notebook>
                         <page string="Stages">
                             <field name="stage_ids" context="{'default_schedule_id': active_id}" nolabel="1">
-                                <tree editable="bottom" string="Stages" create="false" delete="false">
+                                <tree string="Stages" editable="bottom" create="false" delete="false" model="trellis.schedule.stage">
                                     <field name="name"/>
                                     <field name="stage_type"/>
                                     <field name="date_start"/>
                                     <field name="date_stop"/>
                                 </tree>
-                                <form string="Stage">
+                                <form string="Stage" model="trellis.schedule.stage">
                                     <group>
                                         <field name="name"/>
                                         <field name="stage_type"/>
