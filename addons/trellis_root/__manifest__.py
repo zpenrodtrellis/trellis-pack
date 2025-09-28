@@ -6,7 +6,7 @@
     "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",
-        "views/schedule_view.xml",
+        "views/test_view.xml",
     ],
     "installable": True,
     "application": True,
