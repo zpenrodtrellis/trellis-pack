@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Master Schedule Views -->
-    <record id="view_trellis_schedule_tree" model="ir.ui.view">
+    <record id="view_trellis_schedule_list" model="ir.ui.view">
         <field name="name">trellis.schedule.list</field>
         <field name="model">trellis.schedule</field>
         <field name="arch" type="xml">
@@ -44,7 +44,7 @@
                     <notebook>
                         <page string="Stages">
                             <field name="stage_ids">
-                                <list editable="false">
+                                <list>
                                     <field name="name"/>
                                     <field name="stage"/>
                                     <field name="date"/>
