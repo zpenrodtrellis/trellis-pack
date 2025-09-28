@@ -25,8 +25,8 @@
                     <button name="action_release_mo"
                             type="object"
                             string="Release MO"
-                            states="planned"
-                            class="btn-primary"/>
+                            class="btn-primary"
+                            invisible="state == 'released'"/>
                 </header>
                 <sheet>
                     <group>
