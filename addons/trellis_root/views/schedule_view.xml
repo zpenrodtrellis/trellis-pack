@@ -56,17 +56,18 @@
     </record>
 
     <!-- Gantt view -->
-    <record id="view_trellis_schedule_gantt" model="ir.ui.view">
-        <field name="name">trellis.schedule.gantt</field>
-        <field name="model">trellis.schedule</field>
-        <field name="arch" type="xml">
-            <gantt string="Master Schedule" date_start="start_date">
-                <field name="name"/>
-                <field name="product_id"/>
-                <field name="qty"/>
-            </gantt>
-        </field>
-    </record>
+<record id="view_trellis_schedule_gantt" model="ir.ui.view">
+    <field name="name">trellis.schedule.gantt</field>
+    <field name="model">trellis.schedule</field>
+    <field name="arch" type="xml">
+        <gantt string="Master Schedule" date_start="start_date" date_stop="start_date">
+            <field name="name"/>
+            <field name="product_id"/>
+            <field name="qty"/>
+        </gantt>
+    </field>
+</record>
+
 
     <!-- Action + Menu -->
     <record id="trellis_schedule_action" model="ir.actions.act_window">
