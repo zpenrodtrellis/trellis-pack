@@ -78,7 +78,7 @@
         <field name="name">trellis.schedule.stage.gantt</field>
         <field name="model">trellis.schedule.stage</field>
         <field name="arch" type="xml">
-            <gantt string="Stage Schedule" date_start="date">
+            <gantt string="Stage Schedule" date_start="date" date_stop="date">
                 <field name="name"/>
                 <field name="stage"/>
                 <field name="schedule_id"/>
