@@ -40,13 +40,13 @@
                     <notebook>
                         <page string="Stages">
                             <field name="stage_ids" context="{'default_schedule_id': active_id}" nolabel="1">
-                                <tree editable="bottom">
+                                <tree editable="bottom" string="Stages" create="false" delete="false">
                                     <field name="name"/>
                                     <field name="stage_type"/>
                                     <field name="date_start"/>
                                     <field name="date_stop"/>
                                 </tree>
-                                <form>
+                                <form string="Stage">
                                     <group>
                                         <field name="name"/>
                                         <field name="stage_type"/>
