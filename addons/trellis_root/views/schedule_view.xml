@@ -1,4 +1,5 @@
 <odoo>
+    <!-- List view -->
     <record id="view_trellis_schedule_list" model="ir.ui.view">
         <field name="name">trellis.schedule.list</field>
         <field name="model">trellis.schedule</field>
@@ -9,28 +10,39 @@
                 <field name="qty"/>
                 <field name="start_date"/>
                 <field name="state"/>
+                <field name="mo_id"/>
             </list>
         </field>
     </record>
 
+    <!-- Form view -->
     <record id="view_trellis_schedule_form" model="ir.ui.view">
         <field name="name">trellis.schedule.form</field>
         <field name="model">trellis.schedule</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_release_mo"
+                            type="object"
+                            string="Release MO"
+                            states="planned"
+                            class="btn-primary"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="product_id"/>
                         <field name="qty"/>
                         <field name="start_date"/>
-                        <field name="state"/>
+                        <field name="state" readonly="1"/>
+                        <field name="mo_id" readonly="1"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
+    <!-- Action + Menu -->
     <record id="trellis_schedule_action" model="ir.actions.act_window">
         <field name="name">Master Schedule</field>
         <field name="res_model">trellis.schedule</field>
