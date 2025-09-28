@@ -39,8 +39,8 @@
                     </group>
                     <notebook>
                         <page string="Stages">
-                            <field name="stage_ids">
-                                <tree>
+                            <field name="stage_ids" context="{'default_schedule_id': active_id}" nolabel="1">
+                                <tree editable="bottom">
                                     <field name="name"/>
                                     <field name="stage_type"/>
                                     <field name="date_start"/>
