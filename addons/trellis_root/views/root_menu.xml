@@ -1,0 +1,5 @@
+<odoo>
+    <menuitem id="trellis_root_menu" name="Trellis Root"/>
+    <menuitem id="trellis_schedule_menu" name="Master Schedule"
+              parent="trellis_root_menu" action="trellis_schedule_action"/>
+</odoo>
