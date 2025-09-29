@@ -26,7 +26,7 @@ class TrellisSchedule(models.Model):
 
     stage_ids = fields.One2many("trellis.schedule.stage", "schedule_id", string="Stages")
 
-    @api.depends("start_date")
+    @api.depends("start_date", "name")
     def _compute_stage_dates(self):
         for rec in self:
             if rec.start_date:
@@ -43,9 +43,7 @@ class TrellisSchedule(models.Model):
                 rec.dry_date = dry
                 rec.buck_date = buck
 
-                # Sync stage events
-                Stage = self.env["trellis.schedule.stage"]
-                Stage.search([("schedule_id", "=", rec.id)]).unlink()
+                # Reset stage_ids cleanly using One2many commands
                 stages = [
                     ("clone", "Clone", clone),
                     ("veg", "Vegetation", veg),
@@ -54,17 +52,17 @@ class TrellisSchedule(models.Model):
                     ("dry", "Dry", dry),
                     ("buck", "Buck", buck),
                 ]
-                for key, label, date in stages:
-                    Stage.create({
-                        "schedule_id": rec.id,
-                        "stage": key,
-                        "name": f"{rec.name} - {label}",
-                        "date_start": date,
-                        "date_stop": date,
-                    })
+                rec.stage_ids = [(5, 0, 0)]  # clear existing
+                rec.stage_ids = [(0, 0, {
+                    "stage": key,
+                    "name": f"{rec.name} - {label}",
+                    "date_start": date,
+                    "date_stop": date,
+                }) for key, label, date in stages]
+
             else:
                 rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_date = False
-                rec.stage_ids.unlink()
+                rec.stage_ids = [(5, 0, 0)]
 
     def action_release_mo(self):
         for rec in self:
