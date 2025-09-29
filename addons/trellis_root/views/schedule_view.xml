@@ -32,7 +32,7 @@
                                 name="open_mo"
                                 class="oe_stat_button"
                                 icon="fa-industry"
-                                attrs="{'invisible': [('mo_id', '=', False)]}">
+                                invisible="mo_id == False">
                             <field name="mo_id" string="Manufacturing Order" widget="statinfo"/>
                         </button>
                     </div>
@@ -70,7 +70,7 @@
                             type="object"
                             string="Release MO"
                             class="btn-primary"
-                            attrs="{'invisible': [('state', '=', 'released')]}"
+                            invisible="state == 'released'"
                             context="{'reload_after_button': True}"/>
                     <button string="Close" special="cancel"/>
                 </footer>
