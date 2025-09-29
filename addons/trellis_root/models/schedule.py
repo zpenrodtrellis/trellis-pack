@@ -34,23 +34,28 @@ class TrellisSchedule(models.Model):
                 veg = clone + timedelta(days=16)
                 flower = veg + timedelta(days=10)
                 harvest = flower + timedelta(days=65)
-                dry = harvest + timedelta(days=10)
-                buck = dry
 
+                # Harvest = 1 day
+                dry_start = harvest
+                dry_end = harvest + timedelta(days=14)     # 2-week drying window
+                buck_start = dry_end + timedelta(days=1)   # starts after drying
+                buck_end = buck_start + timedelta(days=3)  # 3-day buck window
+
+                # Assign computed fields
                 rec.veg_date = veg
                 rec.flower_date = flower
                 rec.harvest_date = harvest
-                rec.dry_date = dry
-                rec.buck_date = buck
+                rec.dry_date = dry_end
+                rec.buck_date = buck_end
 
-                # Build stage events with durations
+                # Build stage events
                 stages = [
                     ("clone", "Clone", clone, veg),
                     ("veg", "Vegetation", veg, flower),
                     ("flower", "Flower", flower, harvest),
-                    ("harvest", "Harvest", harvest, dry),
-                    ("dry", "Dry", dry, buck),
-                    ("buck", "Buck", buck, buck),
+                    ("harvest", "Harvest", harvest, harvest),      # single day
+                    ("dry", "Dry", dry_start, dry_end),            # 2 weeks
+                    ("buck", "Buck", buck_start, buck_end),        # 3 days
                 ]
 
                 rec.stage_ids = [(5, 0, 0)]  # clear existing
