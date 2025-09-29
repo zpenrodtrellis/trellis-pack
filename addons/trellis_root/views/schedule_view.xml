@@ -67,7 +67,7 @@
                     </notebook>
                 </sheet>
 
-                <!-- Footer buttons -->
+                <!-- ✅ Restored Release MO button -->
                 <footer>
                     <button name="action_release_mo"
                             type="object"
