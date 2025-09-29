@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Master Schedule Views -->
+    <!-- Master Schedule List -->
     <record id="view_trellis_schedule_list" model="ir.ui.view">
         <field name="name">trellis.schedule.list</field>
         <field name="model">trellis.schedule</field>
@@ -20,6 +20,7 @@
         </field>
     </record>
 
+    <!-- Master Schedule Form -->
     <record id="view_trellis_schedule_form" model="ir.ui.view">
         <field name="name">trellis.schedule.form</field>
         <field name="model">trellis.schedule</field>
@@ -65,6 +66,8 @@
                         </page>
                     </notebook>
                 </sheet>
+
+                <!-- Footer buttons -->
                 <footer>
                     <button name="action_release_mo"
                             type="object"
