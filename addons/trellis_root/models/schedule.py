@@ -74,3 +74,15 @@ class TrellisSchedule(models.Model):
             })
             rec.mo_id = mo.id
             rec.state = "released"
+        return True
+
+    def open_mo(self):
+        self.ensure_one()
+        if self.mo_id:
+            return {
+                "type": "ir.actions.act_window",
+                "res_model": "mrp.production",
+                "view_mode": "form",
+                "res_id": self.mo_id.id,
+            }
+        return False

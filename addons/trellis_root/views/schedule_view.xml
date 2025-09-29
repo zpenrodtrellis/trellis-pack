@@ -26,10 +26,10 @@
         <field name="arch" type="xml">
             <form string="Master Schedule">
                 <sheet>
-                    <!-- Smart badge box -->
+                    <!-- Smart badge -->
                     <div class="oe_button_box" name="button_box">
-                        <button type="action"
-                                name="%(mrp.action_production_form)d"
+                        <button type="object"
+                                name="open_mo"
                                 class="oe_stat_button"
                                 icon="fa-industry"
                                 attrs="{'invisible': [('mo_id', '=', False)]}">
