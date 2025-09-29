@@ -15,6 +15,7 @@ class TrellisSchedule(models.Model):
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
     harvest_date = fields.Date("Harvest Date", compute="_compute_stage_dates", store=True)
     dry_date = fields.Date("Dry Complete", compute="_compute_stage_dates", store=True)
+    buck_start_date = fields.Date("Buck Start", compute="_compute_stage_dates", store=True)
     buck_date = fields.Date("Buck Complete", compute="_compute_stage_dates", store=True)
 
     state = fields.Selection([
@@ -37,15 +38,16 @@ class TrellisSchedule(models.Model):
 
                 # Harvest = 1 day
                 dry_start = harvest
-                dry_end = harvest + timedelta(days=14)     # 2-week drying window
+                dry_end = harvest + timedelta(days=14)     # 2 weeks drying
                 buck_start = dry_end + timedelta(days=1)   # starts after drying
-                buck_end = buck_start + timedelta(days=3)  # 3-day buck window
+                buck_end = buck_start + timedelta(days=3)  # 3-day window
 
                 # Assign computed fields
                 rec.veg_date = veg
                 rec.flower_date = flower
                 rec.harvest_date = harvest
                 rec.dry_date = dry_end
+                rec.buck_start_date = buck_start
                 rec.buck_date = buck_end
 
                 # Build stage events
@@ -53,9 +55,9 @@ class TrellisSchedule(models.Model):
                     ("clone", "Clone", clone, veg),
                     ("veg", "Vegetation", veg, flower),
                     ("flower", "Flower", flower, harvest),
-                    ("harvest", "Harvest", harvest, harvest),      # single day
-                    ("dry", "Dry", dry_start, dry_end),            # 2 weeks
-                    ("buck", "Buck", buck_start, buck_end),        # 3 days
+                    ("harvest", "Harvest", harvest, harvest),   # single day
+                    ("dry", "Dry", dry_start, dry_end),         # 2 weeks
+                    ("buck", "Buck", buck_start, buck_end),     # 3 days
                 ]
 
                 rec.stage_ids = [(5, 0, 0)]  # clear existing
@@ -67,7 +69,7 @@ class TrellisSchedule(models.Model):
                 }) for key, label, start, stop in stages]
 
             else:
-                rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_date = False
+                rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_start_date = rec.buck_date = False
                 rec.stage_ids = [(5, 0, 0)]
 
     def action_release_mo(self):
