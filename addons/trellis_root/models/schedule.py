@@ -10,7 +10,7 @@ class TrellisSchedule(models.Model):
     qty = fields.Float("Quantity", required=True)
     start_date = fields.Date("Clone Date", required=True)
 
-    # Stage dates (still computed for later use, but Calendar only uses Clone for now)
+    # Computed stage dates (for reference)
     veg_date = fields.Date("Veg Date", compute="_compute_stage_dates", store=True)
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
     harvest_date = fields.Date("Harvest Date", compute="_compute_stage_dates", store=True)
@@ -23,6 +23,8 @@ class TrellisSchedule(models.Model):
     ], default="planned")
 
     mo_id = fields.Many2one("mrp.production", string="Manufacturing Order")
+
+    stage_ids = fields.One2many("trellis.schedule.stage", "schedule_id", string="Stages")
 
     @api.depends("start_date")
     def _compute_stage_dates(self):
@@ -40,8 +42,29 @@ class TrellisSchedule(models.Model):
                 rec.harvest_date = harvest
                 rec.dry_date = dry
                 rec.buck_date = buck
+
+                # Sync stage events
+                Stage = self.env["trellis.schedule.stage"]
+                Stage.search([("schedule_id", "=", rec.id)]).unlink()
+                stages = [
+                    ("clone", "Clone", clone),
+                    ("veg", "Vegetation", veg),
+                    ("flower", "Flower", flower),
+                    ("harvest", "Harvest", harvest),
+                    ("dry", "Dry", dry),
+                    ("buck", "Buck", buck),
+                ]
+                for key, label, date in stages:
+                    Stage.create({
+                        "schedule_id": rec.id,
+                        "stage": key,
+                        "name": f"{rec.name} - {label}",
+                        "date_start": date,
+                        "date_stop": date,
+                    })
             else:
                 rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_date = False
+                rec.stage_ids.unlink()
 
     def action_release_mo(self):
         for rec in self:
@@ -52,11 +75,3 @@ class TrellisSchedule(models.Model):
             })
             rec.mo_id = mo.id
             rec.state = "released"
-
-    def name_get(self):
-        """Minimal display: always append - Clone."""
-        result = []
-        for record in self:
-            display = f"{record.name} - Clone"
-            result.append((record.id, display))
-        return result

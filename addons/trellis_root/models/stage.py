@@ -14,4 +14,5 @@ class TrellisScheduleStage(models.Model):
         ("dry", "Dry"),
         ("buck", "Buck"),
     ], string="Stage", required=True)
-    date = fields.Date("Date", required=True)
+    date_start = fields.Date("Start Date", required=True)
+    date_stop = fields.Date("End Date", required=True)

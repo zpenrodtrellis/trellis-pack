@@ -41,6 +41,18 @@
                         <field name="dry_date" readonly="1"/>
                         <field name="buck_date" readonly="1"/>
                     </group>
+                    <notebook>
+                        <page string="Stage Events">
+                            <field name="stage_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="stage"/>
+                                    <field name="date_start"/>
+                                    <field name="date_stop"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
                 <footer>
                     <button name="action_release_mo" type="object" string="Release MO" class="btn-primary"/>
@@ -49,37 +61,50 @@
         </field>
     </record>
 
-    <!-- Calendar View -->
-    <record id="view_trellis_schedule_calendar" model="ir.ui.view">
-        <field name="name">trellis.schedule.calendar</field>
-        <field name="model">trellis.schedule</field>
+    <!-- Stage Events Calendar -->
+    <record id="view_trellis_schedule_stage_calendar" model="ir.ui.view">
+        <field name="name">trellis.schedule.stage.calendar</field>
+        <field name="model">trellis.schedule.stage</field>
         <field name="arch" type="xml">
-            <calendar string="Master Schedule" date_start="start_date">
+            <calendar string="Stage Schedule" date_start="date_start" date_stop="date_stop">
                 <field name="name"/>
+                <field name="stage"/>
+                <field name="schedule_id"/>
             </calendar>
         </field>
     </record>
 
-    <!-- Gantt View -->
-    <record id="view_trellis_schedule_gantt" model="ir.ui.view">
-        <field name="name">trellis.schedule.gantt</field>
-        <field name="model">trellis.schedule</field>
+    <!-- Stage Events Gantt -->
+    <record id="view_trellis_schedule_stage_gantt" model="ir.ui.view">
+        <field name="name">trellis.schedule.stage.gantt</field>
+        <field name="model">trellis.schedule.stage</field>
         <field name="arch" type="xml">
-            <gantt string="Master Schedule" date_start="start_date" date_stop="start_date">
+            <gantt string="Stage Schedule" date_start="date_start" date_stop="date_stop">
                 <field name="name"/>
+                <field name="stage"/>
+                <field name="schedule_id"/>
             </gantt>
         </field>
     </record>
 
-    <!-- Menu -->
-    <menuitem id="menu_trellis_root_root" name="Trellis Root"/>
-
+    <!-- Master Schedule Action -->
     <record id="action_trellis_schedule" model="ir.actions.act_window">
         <field name="name">Master Schedule</field>
         <field name="res_model">trellis.schedule</field>
-        <field name="view_mode">list,form,calendar,gantt</field>
+        <field name="view_mode">list,form</field>
     </record>
 
+    <!-- Stage Events Action -->
+    <record id="action_trellis_schedule_stage" model="ir.actions.act_window">
+        <field name="name">Stage Events</field>
+        <field name="res_model">trellis.schedule.stage</field>
+        <field name="view_mode">calendar,gantt,list</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_trellis_root_root" name="Trellis Root"/>
     <menuitem id="menu_trellis_schedule" name="Master Schedule"
               parent="menu_trellis_root_root" action="action_trellis_schedule"/>
+    <menuitem id="menu_trellis_schedule_stage" name="Stage Events"
+              parent="menu_trellis_root_root" action="action_trellis_schedule_stage"/>
 </odoo>
