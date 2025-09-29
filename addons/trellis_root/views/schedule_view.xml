@@ -31,7 +31,7 @@
                             type="object"
                             string="Release MO"
                             class="btn-primary"
-                            states="planned"
+                            invisible="state == 'released'"
                             context="{'reload_after_button': True}"/>
                 </header>
                 <sheet>
