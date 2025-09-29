@@ -55,7 +55,8 @@
                     </notebook>
                 </sheet>
                 <footer>
-                    <button name="action_release_mo" type="object" string="Release MO" class="btn-primary"/>
+                    <button name="action_release_mo" type="object"
+                            string="Release MO" class="btn-primary"/>
                 </footer>
             </form>
         </field>

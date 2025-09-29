@@ -10,7 +10,7 @@ class TrellisSchedule(models.Model):
     qty = fields.Float("Quantity", required=True)
     start_date = fields.Date("Clone Date", required=True)
 
-    # Computed stage dates (for reference)
+    # Computed stage dates (for reference only)
     veg_date = fields.Date("Veg Date", compute="_compute_stage_dates", store=True)
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
     harvest_date = fields.Date("Harvest Date", compute="_compute_stage_dates", store=True)
@@ -43,22 +43,23 @@ class TrellisSchedule(models.Model):
                 rec.dry_date = dry
                 rec.buck_date = buck
 
-                # Reset stage_ids cleanly using One2many commands
+                # Build stage events with durations
                 stages = [
-                    ("clone", "Clone", clone),
-                    ("veg", "Vegetation", veg),
-                    ("flower", "Flower", flower),
-                    ("harvest", "Harvest", harvest),
-                    ("dry", "Dry", dry),
-                    ("buck", "Buck", buck),
+                    ("clone", "Clone", clone, veg),
+                    ("veg", "Vegetation", veg, flower),
+                    ("flower", "Flower", flower, harvest),
+                    ("harvest", "Harvest", harvest, dry),
+                    ("dry", "Dry", dry, buck),
+                    ("buck", "Buck", buck, buck),
                 ]
+
                 rec.stage_ids = [(5, 0, 0)]  # clear existing
                 rec.stage_ids = [(0, 0, {
                     "stage": key,
                     "name": f"{rec.name} - {label}",
-                    "date_start": date,
-                    "date_stop": date,
-                }) for key, label, date in stages]
+                    "date_start": start,
+                    "date_stop": stop,
+                }) for key, label, start, stop in stages]
 
             else:
                 rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_date = False
