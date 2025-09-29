@@ -10,6 +10,11 @@ class TrellisSchedule(models.Model):
     qty = fields.Float("Quantity", required=True)
     start_date = fields.Date("Clone Date", required=True)
 
+    cycle_type = fields.Selection([
+        ("production", "Production Crop"),
+        ("mother", "Mother Replenishment"),
+    ], string="Cycle Type", default="production", required=True)
+
     # Computed stage dates (for reference only)
     veg_date = fields.Date("Veg Date", compute="_compute_stage_dates", store=True)
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
@@ -27,40 +32,53 @@ class TrellisSchedule(models.Model):
 
     stage_ids = fields.One2many("trellis.schedule.stage", "schedule_id", string="Stages")
 
-    @api.depends("start_date", "name")
+    @api.depends("start_date", "name", "cycle_type")
     def _compute_stage_dates(self):
         for rec in self:
             if rec.start_date:
                 clone = fields.Date.from_string(rec.start_date)
                 veg = clone + timedelta(days=16)
-                flower = veg + timedelta(days=10)
-                harvest = flower + timedelta(days=65)
 
-                # Harvest = 1 day
-                dry_start = harvest
-                dry_end = harvest + timedelta(days=14)     # 2 weeks drying
-                buck_start = dry_end + timedelta(days=1)   # starts after drying
-                buck_end = buck_start + timedelta(days=3)  # 3-day window
+                stages = []
 
-                # Assign computed fields
-                rec.veg_date = veg
-                rec.flower_date = flower
-                rec.harvest_date = harvest
-                rec.dry_date = dry_end
-                rec.buck_start_date = buck_start
-                rec.buck_date = buck_end
+                if rec.cycle_type == "production":
+                    flower = veg + timedelta(days=10)
+                    harvest = flower + timedelta(days=65)
 
-                # Build stage events
-                stages = [
-                    ("clone", "Clone", clone, veg),
-                    ("veg", "Vegetation", veg, flower),
-                    ("flower", "Flower", flower, harvest),
-                    ("harvest", "Harvest", harvest, harvest),   # single day
-                    ("dry", "Dry", dry_start, dry_end),         # 2 weeks
-                    ("buck", "Buck", buck_start, buck_end),     # 3 days
-                ]
+                    dry_start = harvest
+                    dry_end = harvest + timedelta(days=14)
+                    buck_start = dry_end + timedelta(days=1)
+                    buck_end = buck_start + timedelta(days=3)
 
-                rec.stage_ids = [(5, 0, 0)]  # clear existing
+                    # Assign computed fields
+                    rec.veg_date = veg
+                    rec.flower_date = flower
+                    rec.harvest_date = harvest
+                    rec.dry_date = dry_end
+                    rec.buck_start_date = buck_start
+                    rec.buck_date = buck_end
+
+                    stages = [
+                        ("clone", "Clone", clone, veg),
+                        ("veg", "Vegetation", veg, flower),
+                        ("flower", "Flower", flower, harvest),
+                        ("harvest", "Harvest", harvest, harvest),
+                        ("dry", "Dry", dry_start, dry_end),
+                        ("buck", "Buck", buck_start, buck_end),
+                    ]
+
+                elif rec.cycle_type == "mother":
+                    # Mother replenishment stops at Veg
+                    rec.veg_date = veg
+                    rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_start_date = rec.buck_date = False
+
+                    stages = [
+                        ("clone", "Clone", clone, veg),
+                        ("veg", "Vegetation", veg, veg + timedelta(days=28)),  # 4-week veg window
+                    ]
+
+                # Replace existing stage_ids
+                rec.stage_ids = [(5, 0, 0)]
                 rec.stage_ids = [(0, 0, {
                     "stage": key,
                     "name": f"{rec.name} - {label}",

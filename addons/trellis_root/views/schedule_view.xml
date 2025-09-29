@@ -8,6 +8,7 @@
             <list string="Master Schedule">
                 <field name="name"/>
                 <field name="product_id"/>
+                <field name="cycle_type"/>
                 <field name="qty"/>
                 <field name="start_date"/>
                 <field name="veg_date"/>
@@ -50,6 +51,7 @@
                     <group>
                         <field name="name"/>
                         <field name="product_id"/>
+                        <field name="cycle_type"/>
                         <field name="qty"/>
                         <field name="start_date"/>
                         <field name="state"/>
