@@ -1,11 +1,18 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from datetime import timedelta
 
 class TrellisSchedule(models.Model):
     _name = "trellis.schedule"
     _description = "Master Schedule"
 
-    name = fields.Char("Job", readonly=True)  # no required=True
+    name = fields.Char(
+        "Job",
+        required=True,
+        copy=False,
+        readonly=True,
+        default=lambda self: _("New"),
+    )
+
     product_id = fields.Many2one("product.product", string="Product", required=True)
     qty = fields.Float("Quantity", required=True)
     start_date = fields.Date("Clone Date", required=True)
@@ -15,7 +22,10 @@ class TrellisSchedule(models.Model):
         ("mother", "Mother Replenishment"),
     ], string="Cycle Type", default="production", required=True)
 
-    # --- Stage Dates ---
+    # Color for Calendar/Gantt
+    color = fields.Integer("Color", compute="_compute_color", store=True)
+
+    # Computed stage dates
     veg_date = fields.Date("Veg Date", compute="_compute_stage_dates", store=True)
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
     harvest_date = fields.Date("Harvest Date", compute="_compute_stage_dates", store=True)
@@ -31,6 +41,16 @@ class TrellisSchedule(models.Model):
     mo_id = fields.Many2one("mrp.production", string="Manufacturing Order")
 
     stage_ids = fields.One2many("trellis.schedule.stage", "schedule_id", string="Stages")
+
+    @api.depends("cycle_type")
+    def _compute_color(self):
+        for rec in self:
+            if rec.cycle_type == "production":
+                rec.color = 10  # Green
+            elif rec.cycle_type == "mother":
+                rec.color = 2   # Purple
+            else:
+                rec.color = 0   # Default grey
 
     @api.depends("start_date", "name", "cycle_type")
     def _compute_stage_dates(self):
@@ -78,29 +98,33 @@ class TrellisSchedule(models.Model):
                 rec.stage_ids = [(5, 0, 0)]
                 rec.stage_ids = [(0, 0, {
                     "stage": key,
-                    "name": f"{rec.product_id.name} - {label}",
+                    "name": f"{rec.name} - {label}",
                     "date_start": start,
                     "date_stop": stop,
                 }) for key, label, start, stop in stages]
+
             else:
                 rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_start_date = rec.buck_date = False
                 rec.stage_ids = [(5, 0, 0)]
 
-    # --- Auto-generate Job Name ---
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", _("New")) == _("New"):
+                product = self.env["product.product"].browse(vals.get("product_id"))
+                strain_name = product.display_name if product else "Unknown"
 
-        if not record.name:
-            strain = record.product_id.name or "Unknown"
-            cycle_code = "PC" if record.cycle_type == "production" else "MR"
-            date_str = record.start_date and record.start_date.strftime("%Y%m%d") or fields.Date.today().strftime("%Y%m%d")
+                cycle_type = vals.get("cycle_type", "production")
+                cycle_code = "PC" if cycle_type == "production" else "MR"
 
-            seq = self.env["ir.sequence"].next_by_code("trellis.schedule") or "000"
+                clone_date = vals.get("start_date")
+                date_str = clone_date.replace("-", "") if clone_date else "00000000"
 
-            record.name = f"{strain} - {cycle_code} - {date_str} - {seq}"
+                seq = self.env["ir.sequence"].next_by_code("trellis.schedule") or "000"
 
-        return record
+                vals["name"] = f"{strain_name} - {cycle_code} - {date_str} - {seq}"
+
+        return super().create(vals_list)
 
     def action_release_mo(self):
         for rec in self:
