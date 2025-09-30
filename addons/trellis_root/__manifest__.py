@@ -6,6 +6,7 @@
     "depends": ["base", "product", "mrp"],  # now includes Manufacturing
     "data": [
         "security/ir.model.access.csv",
+        "data/schedule_sequence.xml",
         "views/schedule_view.xml",
     ],
     "installable": True,

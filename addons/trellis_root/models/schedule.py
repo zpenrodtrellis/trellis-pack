@@ -5,7 +5,7 @@ class TrellisSchedule(models.Model):
     _name = "trellis.schedule"
     _description = "Master Schedule"
 
-    name = fields.Char("Job", required=True)
+    name = fields.Char("Job", readonly=True)  # no required=True
     product_id = fields.Many2one("product.product", string="Product", required=True)
     qty = fields.Float("Quantity", required=True)
     start_date = fields.Date("Clone Date", required=True)
@@ -15,7 +15,7 @@ class TrellisSchedule(models.Model):
         ("mother", "Mother Replenishment"),
     ], string="Cycle Type", default="production", required=True)
 
-    # Computed stage dates (for reference only)
+    # --- Stage Dates ---
     veg_date = fields.Date("Veg Date", compute="_compute_stage_dates", store=True)
     flower_date = fields.Date("Flower Date", compute="_compute_stage_dates", store=True)
     harvest_date = fields.Date("Harvest Date", compute="_compute_stage_dates", store=True)
@@ -50,7 +50,6 @@ class TrellisSchedule(models.Model):
                     buck_start = dry_end + timedelta(days=1)
                     buck_end = buck_start + timedelta(days=3)
 
-                    # Assign computed fields
                     rec.veg_date = veg
                     rec.flower_date = flower
                     rec.harvest_date = harvest
@@ -68,27 +67,40 @@ class TrellisSchedule(models.Model):
                     ]
 
                 elif rec.cycle_type == "mother":
-                    # Mother replenishment stops at Veg
                     rec.veg_date = veg
                     rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_start_date = rec.buck_date = False
 
                     stages = [
                         ("clone", "Clone", clone, veg),
-                        ("veg", "Vegetation", veg, veg + timedelta(days=28)),  # 4-week veg window
+                        ("veg", "Vegetation", veg, veg + timedelta(days=28)),
                     ]
 
-                # Replace existing stage_ids
                 rec.stage_ids = [(5, 0, 0)]
                 rec.stage_ids = [(0, 0, {
                     "stage": key,
-                    "name": f"{rec.name} - {label}",
+                    "name": f"{rec.product_id.name} - {label}",
                     "date_start": start,
                     "date_stop": stop,
                 }) for key, label, start, stop in stages]
-
             else:
                 rec.veg_date = rec.flower_date = rec.harvest_date = rec.dry_date = rec.buck_start_date = rec.buck_date = False
                 rec.stage_ids = [(5, 0, 0)]
+
+    # --- Auto-generate Job Name ---
+    @api.model
+    def create(self, vals):
+        record = super().create(vals)
+
+        if not record.name:
+            strain = record.product_id.name or "Unknown"
+            cycle_code = "PC" if record.cycle_type == "production" else "MR"
+            date_str = record.start_date and record.start_date.strftime("%Y%m%d") or fields.Date.today().strftime("%Y%m%d")
+
+            seq = self.env["ir.sequence"].next_by_code("trellis.schedule") or "000"
+
+            record.name = f"{strain} - {cycle_code} - {date_str} - {seq}"
+
+        return record
 
     def action_release_mo(self):
         for rec in self:
