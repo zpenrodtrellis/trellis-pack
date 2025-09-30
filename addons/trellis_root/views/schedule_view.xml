@@ -105,11 +105,10 @@
         <field name="name">trellis.schedule.stage.calendar</field>
         <field name="model">trellis.schedule.stage</field>
         <field name="arch" type="xml">
-            <calendar string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="schedule_id.color">
+            <calendar string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="color">
                 <field name="name"/>
                 <field name="stage"/>
-                <field name="schedule_id"/>
-                <field name="schedule_id.cycle_type"/>
+                <field name="cycle_type"/>
             </calendar>
         </field>
     </record>
@@ -119,11 +118,10 @@
         <field name="name">trellis.schedule.stage.gantt</field>
         <field name="model">trellis.schedule.stage</field>
         <field name="arch" type="xml">
-            <gantt string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="schedule_id.color">
+            <gantt string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="color">
                 <field name="name"/>
                 <field name="stage"/>
-                <field name="schedule_id"/>
-                <field name="schedule_id.cycle_type"/>
+                <field name="cycle_type"/>
             </gantt>
         </field>
     </record>

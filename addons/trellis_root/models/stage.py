@@ -16,3 +16,7 @@ class TrellisScheduleStage(models.Model):
     ], string="Stage", required=True)
     date_start = fields.Date("Start Date", required=True)
     date_stop = fields.Date("End Date", required=True)
+
+    # ✅ Related fields for display
+    cycle_type = fields.Selection(related="schedule_id.cycle_type", store=True)
+    color = fields.Integer(related="schedule_id.color", store=True)
