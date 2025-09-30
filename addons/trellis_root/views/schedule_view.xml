@@ -49,7 +49,7 @@
                     </div>
 
                     <group>
-                        <field name="name"/>
+                        <field name="name" readonly="1"/>
                         <field name="product_id"/>
                         <field name="cycle_type"/>
                         <field name="qty"/>
@@ -79,6 +79,24 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Master Schedule Search -->
+    <record id="view_trellis_schedule_search" model="ir.ui.view">
+        <field name="name">trellis.schedule.search</field>
+        <field name="model">trellis.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Search Master Schedule">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="cycle_type"/>
+                <field name="state"/>
+                <filter string="Production" name="filter_production" domain="[('cycle_type','=','production')]"/>
+                <filter string="Mother" name="filter_mother" domain="[('cycle_type','=','mother')]"/>
+                <filter string="Planned" name="filter_planned" domain="[('state','=','planned')]"/>
+                <filter string="Released" name="filter_released" domain="[('state','=','released')]"/>
+            </search>
         </field>
     </record>
 
@@ -113,6 +131,7 @@
         <field name="name">Master Schedule</field>
         <field name="res_model">trellis.schedule</field>
         <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_trellis_schedule_search"/>
     </record>
 
     <!-- Stage Events Action -->
