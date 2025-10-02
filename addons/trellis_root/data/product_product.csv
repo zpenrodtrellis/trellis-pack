@@ -1,0 +1,41 @@
+id,name,type,categ_id/id,standard_price,uom_id/id
+prod_clone_cutting_labor,Clone Cutting Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_clone_watering_labor,Clone Watering Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_clone_plugs,Clone Plugs,consu,product.product_category_all,0.20,product.product_uom_unit
+prod_clone_rooting_gel,Clone Rooting Gel,consu,product.product_category_all,50,product.product_uom_unit
+prod_clone_nutrients,Clone Nutrients (Jack's),consu,product.product_category_all,0.016,product.product_uom_unit
+prod_clone_water,Clone Water,consu,product.product_category_all,0.003,product.product_uom_unit
+prod_clone_lighting,Clone Lighting Overhead,service,product.product_category_all,320,product.product_uom_unit
+prod_clone_hvac,Clone HVAC Overhead,service,product.product_category_all,160,product.product_uom_unit
+prod_veg_transplant,Veg Transplant Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_veg_tagging,Veg Tagging Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_veg_care,Veg General Care Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_move_flower,Move-to-Flower Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_veg_pots,Veg Pots (3 gal),consu,product.product_category_all,1.5,product.product_uom_unit
+prod_veg_coco,Veg Coco Media,consu,product.product_category_all,0.25,product.product_uom_unit
+prod_veg_nutrients,Veg Nutrients (Jack's),consu,product.product_category_all,0.032,product.product_uom_unit
+prod_veg_water,Veg Water,consu,product.product_category_all,0.003,product.product_uom_unit
+prod_veg_lighting,Veg Lighting Overhead,service,product.product_category_all,1000,product.product_uom_unit
+prod_veg_hvac,Veg HVAC Overhead,service,product.product_category_all,200,product.product_uom_unit
+prod_veg_ipm_labor,Veg IPM Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_veg_ipm_supplies,Veg IPM Supplies,consu,product.product_category_all,50,product.product_uom_unit
+prod_flower_care,Flower Daily Care Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_flower_defol,Flower Defoliation Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_flower_waste,Flower Waste Mgmt Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_flower_nutrients,Flower Nutrients (Jack's),consu,product.product_category_all,0.032,product.product_uom_unit
+prod_flower_water,Flower Water,consu,product.product_category_all,0.003,product.product_uom_unit
+prod_flower_lighting,Flower Lighting Overhead,service,product.product_category_all,2000,product.product_uom_unit
+prod_flower_hvac,Flower HVAC Overhead,service,product.product_category_all,1000,product.product_uom_unit
+prod_flower_ipm_labor,Flower IPM Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_flower_ipm_supplies,Flower IPM Supplies,consu,product.product_category_all,200,product.product_uom_unit
+prod_harvest_labor,Harvest Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_harvest_supplies,Harvest Supplies,consu,product.product_category_all,250,product.product_uom_unit
+prod_buck_labor,Buck Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_buck_supplies,Buck Supplies,consu,product.product_category_all,250,product.product_uom_unit
+prod_dry_monitoring,Dry Room Monitoring Labor Hours,service,product.product_category_all,20,product.product_uom_hour
+prod_dry_hvac,Dry Room HVAC Overhead,service,product.product_category_all,500,product.product_uom_unit
+prod_dry_supplies,Dry Room Supplies,consu,product.product_category_all,100,product.product_uom_unit
+prod_metrc_license,METRC License Allocation,consu,product.product_category_all,1000,product.product_uom_unit
+prod_plant_tags,Plant Tags,consu,product.product_category_all,0.45,product.product_uom_unit
+prod_clone_tags,Clone Package Tags,consu,product.product_category_all,0.25,product.product_uom_unit
+prod_flower_tag,Flower Package Tag,consu,product.product_category_all,0.25,product.product_uom_unit
