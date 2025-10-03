@@ -1,4 +1,4 @@
-id,name,type,categ_id/id,standard_price,uom_id/id,uom_po_id/id
+id,name,type,categ_id/id,list_price,uom_id/id,uom_po_id/id
 tmpl_clone_cutting_labor,Clone Cutting Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_clone_watering_labor,Clone Watering Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_clone_plugs,Clone Plugs,consu,trellis_root.prod_inputs_category,0.20,uom.product_uom_unit,uom.product_uom_unit
@@ -30,6 +30,7 @@ tmpl_flower_lighting,Flower Lighting Overhead,service,trellis_root.prod_inputs_c
 tmpl_flower_hvac,Flower HVAC Overhead,service,trellis_root.prod_inputs_category,1000,uom.product_uom_unit,uom.product_uom_unit
 tmpl_flower_ipm_labor,Flower IPM Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_flower_ipm_supplies,Flower IPM Supplies,consu,trellis_root.prod_inputs_category,200,uom.product_uom_unit,uom.product_uom_unit
+tmpl_flower_co2,Flower CO2 Weeks 1-7,consu,trellis_root.prod_inputs_category,0.05,uom.product_uom_unit,uom.product_uom_unit
 
 tmpl_harvest_labor,Harvest Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_harvest_supplies,Harvest Supplies,consu,trellis_root.prod_inputs_category,250,uom.product_uom_unit,uom.product_uom_unit
@@ -45,4 +46,3 @@ tmpl_metrc_license,METRC License Allocation,consu,trellis_root.prod_inputs_categ
 tmpl_plant_tags,Plant Tags,consu,trellis_root.prod_inputs_category,0.45,uom.product_uom_unit,uom.product_uom_unit
 tmpl_clone_tags,Clone Package Tags,consu,trellis_root.prod_inputs_category,0.25,uom.product_uom_unit,uom.product_uom_unit
 tmpl_flower_tag,Flower Package Tag,consu,trellis_root.prod_inputs_category,0.25,uom.product_uom_unit,uom.product_uom_unit
-tmpl_flower_co2,Flower CO2 Weeks 1-7,consu,trellis_root.prod_inputs_category,0.05,uom.product_uom_unit,uom.product_uom_unit

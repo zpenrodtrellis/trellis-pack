@@ -30,6 +30,7 @@ prod_flower_lighting,tmpl_flower_lighting
 prod_flower_hvac,tmpl_flower_hvac
 prod_flower_ipm_labor,tmpl_flower_ipm_labor
 prod_flower_ipm_supplies,tmpl_flower_ipm_supplies
+prod_flower_co2,tmpl_flower_co2
 
 prod_harvest_labor,tmpl_harvest_labor
 prod_harvest_supplies,tmpl_harvest_supplies
@@ -45,4 +46,3 @@ prod_metrc_license,tmpl_metrc_license
 prod_plant_tags,tmpl_plant_tags
 prod_clone_tags,tmpl_clone_tags
 prod_flower_tag,tmpl_flower_tag
-prod_flower_co2,tmpl_flower_co2
