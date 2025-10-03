@@ -1,4 +1,4 @@
-id,name,type,categ_id/id,list_price,uom_id/id,uom_po_id/id
+id,name,detailed_type,categ_id/id,list_price,uom_id/id,uom_po_id/id
 tmpl_clone_cutting_labor,Clone Cutting Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_clone_watering_labor,Clone Watering Labor Hours,service,trellis_root.prod_inputs_category,20,uom.product_uom_hour,uom.product_uom_hour
 tmpl_clone_plugs,Clone Plugs,consu,trellis_root.prod_inputs_category,0.20,uom.product_uom_unit,uom.product_uom_unit
