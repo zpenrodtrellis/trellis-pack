@@ -45,3 +45,4 @@ tmpl_metrc_license,METRC License Allocation,consu,trellis_root.prod_inputs_categ
 tmpl_plant_tags,Plant Tags,consu,trellis_root.prod_inputs_category,0.45,uom.product_uom_unit,uom.product_uom_unit
 tmpl_clone_tags,Clone Package Tags,consu,trellis_root.prod_inputs_category,0.25,uom.product_uom_unit,uom.product_uom_unit
 tmpl_flower_tag,Flower Package Tag,consu,trellis_root.prod_inputs_category,0.25,uom.product_uom_unit,uom.product_uom_unit
+tmpl_flower_co2,Flower CO2 Weeks 1-7,consu,trellis_root.prod_inputs_category,0.05,uom.product_uom_unit,uom.product_uom_unit

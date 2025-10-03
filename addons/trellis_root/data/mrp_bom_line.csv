@@ -45,3 +45,4 @@ bomline_metrc_license,bom_production_crop,prod_metrc_license,1,uom.product_uom_u
 bomline_plant_tags,bom_production_crop,prod_plant_tags,1000,uom.product_uom_unit
 bomline_clone_tags,bom_production_crop,prod_clone_tags,10,uom.product_uom_unit
 bomline_flower_tag,bom_production_crop,prod_flower_tag,1,uom.product_uom_unit
+bomline_flower_co2,bom_production_crop,prod_flower_co2,7,uom.product_uom_unit

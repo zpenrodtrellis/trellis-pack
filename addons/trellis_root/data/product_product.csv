@@ -45,3 +45,4 @@ prod_metrc_license,tmpl_metrc_license
 prod_plant_tags,tmpl_plant_tags
 prod_clone_tags,tmpl_clone_tags
 prod_flower_tag,tmpl_flower_tag
+prod_flower_co2,tmpl_flower_co2
