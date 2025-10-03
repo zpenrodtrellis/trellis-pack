@@ -2,10 +2,12 @@
     <!-- Where you’ll assign all 120 strains -->
     <record id="prod_strains_category" model="product.category">
         <field name="name">Production Strains</field>
+        <field name="parent_id" ref="product.product_category_all"/>
     </record>
 
     <!-- Where all cost inputs (labor/overhead/materials/tags) live -->
     <record id="prod_inputs_category" model="product.category">
         <field name="name">Trellis Cost Inputs</field>
+        <field name="parent_id" ref="product.product_category_all"/>
     </record>
 </odoo>
