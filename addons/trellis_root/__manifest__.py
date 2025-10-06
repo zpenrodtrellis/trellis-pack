@@ -20,7 +20,7 @@
 
         # Product category and cost input products
         "data/product_category.xml",
-        "data/product_template.csv",   # templates for cost inputs
+        "data/product.template.csv",   # templates for cost inputs
         "data/product_product.csv",    # variants for cost inputs
 
         # BoMs
