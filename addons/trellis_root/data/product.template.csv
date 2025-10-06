@@ -1,2 +1,2 @@
-id,name,detailed_type
-tmpl_test,Test Product,consu
+id,name,type,categ_id/id,list_price,uom_id/id,uom_po_id/id
+tmpl_test,Test Product,consu,trellis_root.prod_inputs_category,1,uom.product_uom_unit,uom.product_uom_unit
