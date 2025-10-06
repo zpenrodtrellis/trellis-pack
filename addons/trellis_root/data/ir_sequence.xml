@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_trellis_schedule" model="ir.sequence">
+        <field name="name">Trellis Schedule</field>
+        <field name="code">trellis.schedule</field>
+        <field name="prefix"></field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>
