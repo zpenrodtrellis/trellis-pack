@@ -11,12 +11,11 @@ class TrellisVaultStrain(models.Model):
     note = fields.Text()
     mother_tag_count = fields.Integer(
         compute="_compute_mother_tag_count",
-        store=False,
         help="Number of mother tags linked to this strain",
     )
 
-    @api.depends('id')
     def _compute_mother_tag_count(self):
+        # efficient count by strain via read_group
         groups = self.env['trellis.vault.mother.tag'].read_group(
             [('strain_id', 'in', self.ids)],
             fields=['strain_id'],
