@@ -1,10 +1,6 @@
 <odoo>
-  <menuitem id="menu_trellis_root" name="Trellis"/>
-  <menuitem id="menu_trellis_vault" name="Vault" parent="menu_trellis_root" sequence="10"/>
-  <menuitem id="menu_trellis_vault_master" name="Master Data" parent="menu_trellis_vault" sequence="10"/>
-
-  <menuitem id="menu_trellis_vault_strain" name="Strains"
-            parent="menu_trellis_vault_master" action="action_trellis_vault_strain" sequence="10"/>
-  <menuitem id="menu_trellis_vault_mother_tag" name="Mother Tags"
-            parent="menu_trellis_vault_master" action="action_trellis_vault_mother_tag" sequence="20"/>
+    <menuitem id="menu_trellis_vault_root" name="Trellis Vault" sequence="10"/>
+    <menuitem id="menu_trellis_vault_master" name="Master Data" parent="menu_trellis_vault_root" sequence="10"/>
+    <menuitem id="menu_trellis_vault_strain" name="Strains" parent="menu_trellis_vault_master" action="action_trellis_vault_strain" sequence="10"/>
+    <menuitem id="menu_trellis_vault_mother_tag" name="Mother Tags" parent="menu_trellis_vault_master" action="action_trellis_vault_mother_tag" sequence="20"/>
 </odoo>

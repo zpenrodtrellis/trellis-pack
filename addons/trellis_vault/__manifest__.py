@@ -2,6 +2,7 @@
     "name": "Trellis Vault",
     "version": "19.0.1.0.0",
     "summary": "Master data for strains and mother tags (Vault)",
+    "author": "Trellis Systems",
     "license": "LGPL-3",
     "depends": ["base"],
     "data": [

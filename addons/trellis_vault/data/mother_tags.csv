@@ -1,7 +1,4 @@
-id,name,strain_id/id,group_no,active
-mt_bd_0001,BD-0001,trellis_vault.strain_blue_dream,1,1
-mt_bd_0002,BD-0002,trellis_vault.strain_blue_dream,1,1
-mt_bd_0100,BD-0100,trellis_vault.strain_blue_dream,1,1
-mt_bd_0101,BD-0101,trellis_vault.strain_blue_dream,2,1
-mt_sd_0001,SD-0001,trellis_vault.strain_sour_diesel,1,1
-mt_gel_0001,GEL-0001,trellis_vault.strain_gelato,1,1
+id,name,strain_id/id,tag_number
+momtag_1,Mother 001,strain_1,METRC001
+momtag_2,Mother 002,strain_2,METRC002
+momtag_3,Mother 003,strain_3,METRC003
