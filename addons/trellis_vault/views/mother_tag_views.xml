@@ -15,12 +15,14 @@
         <field name="name">trellis.vault.mother.tag.form</field>
         <field name="model">trellis.vault.mother.tag</field>
         <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="name"/>
-                    <field name="strain_id"/>
-                    <field name="tag_number"/>
-                </group>
+            <form string="Mother Tag">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="strain_id"/>
+                        <field name="tag_number"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
