@@ -6,9 +6,9 @@
     "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",
-        "views/menus.xml",
         "views/strain_views.xml",
         "views/mother_tag_views.xml",
+        "views/menus.xml",
         "data/strain_master.csv",
         "data/mother_tags.csv",
     ],
