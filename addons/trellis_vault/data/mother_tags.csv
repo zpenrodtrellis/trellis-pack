@@ -1,0 +1,7 @@
+id,name,strain_id/id,group_no,active
+mt_bd_0001,BD-0001,trellis_vault.strain_blue_dream,1,1
+mt_bd_0002,BD-0002,trellis_vault.strain_blue_dream,1,1
+mt_bd_0100,BD-0100,trellis_vault.strain_blue_dream,1,1
+mt_bd_0101,BD-0101,trellis_vault.strain_blue_dream,2,1
+mt_sd_0001,SD-0001,trellis_vault.strain_sour_diesel,1,1
+mt_gel_0001,GEL-0001,trellis_vault.strain_gelato,1,1

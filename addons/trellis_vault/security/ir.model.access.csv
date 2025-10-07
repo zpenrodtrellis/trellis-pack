@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_strain_user,access_strain_user,model_trellis_vault_strain,base.group_user,1,1,1,0
+access_mothertag_user,access_mothertag_user,model_trellis_vault_mother_tag,base.group_user,1,1,1,0
+access_strain_manager,access_strain_manager,model_trellis_vault_strain,base.group_system,1,1,1,1
+access_mothertag_manager,access_mothertag_manager,model_trellis_vault_mother_tag,base.group_system,1,1,1,1
