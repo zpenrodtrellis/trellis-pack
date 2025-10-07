@@ -3,13 +3,13 @@
     <field name="name">trellis.vault.strain.tree</field>
     <field name="model">trellis.vault.strain</field>
     <field name="arch" type="xml">
-      <tree>
+      <list>
         <field name="name"/>
         <field name="code"/>
         <field name="default_mother_tag_prefix"/>
         <field name="active"/>
         <field name="mother_tag_count" string="# Mother Tags"/>
-      </tree>
+      </list>
     </field>
   </record>
 
