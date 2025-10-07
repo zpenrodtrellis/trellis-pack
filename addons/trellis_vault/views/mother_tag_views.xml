@@ -3,12 +3,12 @@
     <field name="name">trellis.vault.mother.tag.tree</field>
     <field name="model">trellis.vault.mother.tag</field>
     <field name="arch" type="xml">
-      <tree>
+      <list>
         <field name="name"/>
         <field name="strain_id"/>
         <field name="group_no"/>
         <field name="active"/>
-      </tree>
+      </list>
     </field>
   </record>
 
