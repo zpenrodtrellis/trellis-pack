@@ -27,11 +27,11 @@
             <form string="Training Record">
                 <header>
                     <button name="action_reset_to_draft" type="object" string="Set Draft"
-                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                            invisible="state == 'draft'"/>
                     <button name="action_complete" type="object" string="Complete"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_sign_and_lock" type="object" string="Sign &amp; Lock"
-                            attrs="{'invisible': [('state', '!=', 'completed')]}"/>
+                            invisible="state != 'completed'"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
