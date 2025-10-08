@@ -4,16 +4,14 @@
     "summary": "Vault master data + controlled documents + training records",
     "author": "Trellis Systems",
     "license": "LGPL-3",
-    "depends": ["base", "mail"],
+    "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",
-        # existing views (keep)
         "views/strain_views.xml",
         "views/mother_tag_views.xml",
-        "views/menus.xml",
-        # NEW controlled docs
-        "views/controlled_document_views.xml",
+        "views/controlled_document_views.xml",  # must load before menus
         "views/training_record_views.xml",
+        "views/menus.xml",
     ],
     "installable": True,
     "application": False,
