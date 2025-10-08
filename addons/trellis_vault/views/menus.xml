@@ -16,3 +16,21 @@
         action="action_trellis_vault_mother_tag"
         sequence="20"/>
 </odoo>
+<odoo>
+    <!-- keep existing Vault root + Master Data menus -->
+
+    <menuitem id="menu_trellis_vault_quality" name="Quality & Docs"
+              parent="menu_trellis_vault_root" sequence="30"/>
+
+    <menuitem id="menu_trellis_vault_controlled_documents"
+              name="Controlled Documents"
+              parent="menu_trellis_vault_quality"
+              action="action_trellis_vault_controlled_document"
+              sequence="10"/>
+
+    <menuitem id="menu_trellis_vault_training_records"
+              name="Training Records"
+              parent="menu_trellis_vault_quality"
+              action="action_trellis_vault_training_record"
+              sequence="20"/>
+</odoo>

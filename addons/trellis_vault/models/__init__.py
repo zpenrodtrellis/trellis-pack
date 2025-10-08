@@ -1,2 +1,4 @@
-from . import strain_master
-from . import mother_tag
+from . import strain_master      # if present in your repo
+from . import mother_tag         # if present in your repo
+from . import controlled_document
+from . import training_record

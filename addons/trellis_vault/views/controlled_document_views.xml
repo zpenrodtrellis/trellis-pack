@@ -1,0 +1,62 @@
+<odoo>
+    <record id="view_trellis_vault_controlled_document_list" model="ir.ui.view">
+        <field name="name">trellis.vault.controlled.document.list</field>
+        <field name="model">trellis.vault.controlled.document</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="revision"/>
+                <field name="state"/>
+                <field name="effective_date"/>
+                <field name="owner_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_trellis_vault_controlled_document_form" model="ir.ui.view">
+        <field name="name">trellis.vault.controlled.document.form</field>
+        <field name="model">trellis.vault.controlled.document</field>
+        <field name="arch" type="xml">
+            <form string="Controlled Document">
+                <header>
+                    <button name="action_reset_to_draft" type="object" string="Set Draft"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="action_activate" type="object" string="Activate"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_archive" type="object" string="Archive"
+                            attrs="{'invisible': [('state', '=', 'archived')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" attrs="{'readonly': [('is_locked','=',True)]}"/>
+                        <field name="code" attrs="{'readonly': [('is_locked','=',True)]}"/>
+                        <field name="revision" attrs="{'readonly': [('is_locked','=',True)]}"/>
+                        <field name="previous_version_id" options="{'no_open': False}"
+                               attrs="{'readonly': [('is_locked','=',True)]}"/>
+                        <field name="effective_date" attrs="{'readonly': [('is_locked','=',True)]}"/>
+                        <field name="owner_id" attrs="{'readonly': [('is_locked','=',True)]}"/>
+                    </group>
+                    <group string="Related">
+                        <button name="action_view_training_records" type="object"
+                                class="oe_stat_button" icon="fa-users">
+                            <field name="training_record_count" widget="statinfo" string="Training Records"/>
+                        </button>
+                    </group>
+                    <notebook>
+                        <page string="Chatter">
+                            <div class="oe_chatter"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_trellis_vault_controlled_document" model="ir.actions.act_window">
+        <field name="name">Controlled Documents</field>
+        <field name="res_model">trellis.vault.controlled.document</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
