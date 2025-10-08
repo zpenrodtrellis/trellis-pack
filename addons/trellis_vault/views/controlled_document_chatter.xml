@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Inherit the existing Controlled Document form and add chatter for attachments -->
+    <record id="view_trellis_vault_controlled_document_chatter" model="ir.ui.view">
+        <field name="name">trellis.vault.controlled.document.form.chatter</field>
+        <field name="model">trellis.vault.controlled.document</field>
+        <field name="inherit_id" ref="trellis_vault.view_trellis_vault_controlled_document_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="after">
+                <!-- Chatter enables paperclip uploads + audit feed; no extra fields required -->
+                <div class="oe_chatter"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
