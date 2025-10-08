@@ -24,8 +24,9 @@
                             attrs="{'invisible': [('state', '=', 'draft')]}"/>
                     <button name="action_complete" type="object" string="Complete"
                             attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="action_sign_and_lock" type="object" string="Sign & Lock"
+                    <button name="action_sign_and_lock" type="object" string="Sign &amp; Lock"
                             attrs="{'invisible': [('state', '!=', 'completed')]}"/>
+
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>

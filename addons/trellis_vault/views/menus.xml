@@ -24,7 +24,7 @@
 
     <!-- Quality & Docs -->
     <menuitem id="menu_trellis_vault_quality"
-              name="Quality & Docs"
+              name="Quality &amp; Docs"
               parent="menu_trellis_vault_root"
               sequence="30"/>
 
