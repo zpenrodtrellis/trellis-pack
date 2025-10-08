@@ -1,26 +1,32 @@
 <odoo>
-    <menuitem id="menu_trellis_vault_root" name="Trellis Vault" sequence="10"/>
-    <menuitem id="menu_trellis_vault_master" name="Master Data" parent="menu_trellis_vault_root" sequence="10"/>
+    <!-- Root Menu -->
+    <menuitem id="menu_trellis_vault_root"
+              name="Trellis Vault"
+              sequence="10"/>
 
-    <menuitem
-        id="menu_trellis_vault_strain"
-        name="Strains"
-        parent="menu_trellis_vault_master"
-        action="action_trellis_vault_strain"
-        sequence="10"/>
+    <!-- Master Data Submenu -->
+    <menuitem id="menu_trellis_vault_master"
+              name="Master Data"
+              parent="menu_trellis_vault_root"
+              sequence="10"/>
 
-    <menuitem
-        id="menu_trellis_vault_mother_tag"
-        name="Mother Tags"
-        parent="menu_trellis_vault_master"
-        action="action_trellis_vault_mother_tag"
-        sequence="20"/>
-</odoo>
-<odoo>
-    <!-- keep existing Vault root + Master Data menus -->
+    <menuitem id="menu_trellis_vault_strain"
+              name="Strains"
+              parent="menu_trellis_vault_master"
+              action="action_trellis_vault_strain"
+              sequence="10"/>
 
-    <menuitem id="menu_trellis_vault_quality" name="Quality & Docs"
-              parent="menu_trellis_vault_root" sequence="30"/>
+    <menuitem id="menu_trellis_vault_mother_tag"
+              name="Mother Tags"
+              parent="menu_trellis_vault_master"
+              action="action_trellis_vault_mother_tag"
+              sequence="20"/>
+
+    <!-- Quality & Docs -->
+    <menuitem id="menu_trellis_vault_quality"
+              name="Quality & Docs"
+              parent="menu_trellis_vault_root"
+              sequence="30"/>
 
     <menuitem id="menu_trellis_vault_controlled_documents"
               name="Controlled Documents"
