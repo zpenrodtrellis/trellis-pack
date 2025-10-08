@@ -27,8 +27,7 @@
         <field name="name">trellis.vault.controlled.document.form</field>
         <field name="model">trellis.vault.controlled.document</field>
         <field name="arch" type="xml">
-            <form string="Controlled Document">
-                <!-- Header -->
+            <form string="Controlled Document" class="o_form_document">
                 <header>
                     <button name="action_reset_to_draft" type="object" string="Set Draft"
                             invisible="state == 'draft'"/>
@@ -50,8 +49,11 @@
                     </group>
                 </sheet>
 
-                <!-- ✅ Explicit chatter zone -->
-                <div class="oe_chatter" options="{'open_chatter': True}"/>
+                <!-- ✅ Proper chatter block for Odoo 19 -->
+                <div class="oe_chatter" role="feed">
+                    <field name="message_ids" widget="mail_thread" options="{'open_chatter': True}"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
             </form>
         </field>
     </record>
