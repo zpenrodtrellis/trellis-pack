@@ -38,5 +38,9 @@
                     </group>
                 </sheet>
 
-                <!-- ✅ Added: native chatter for attachments + audit log -->
-                <div
+                <!-- ✅ Correctly closed chatter div for attachments + audit log -->
+                <div class="oe_chatter" options="{'open_chatter': True}"/>
+            </form>
+        </field>
+    </record>
+</odoo>
