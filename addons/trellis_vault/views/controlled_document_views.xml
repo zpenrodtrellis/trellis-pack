@@ -1,4 +1,5 @@
 <odoo>
+    <!-- List View -->
     <record id="view_trellis_vault_controlled_document_list" model="ir.ui.view">
         <field name="name">trellis.vault.controlled.document.list</field>
         <field name="model">trellis.vault.controlled.document</field>
@@ -14,6 +15,7 @@
         </field>
     </record>
 
+    <!-- Form View -->
     <record id="view_trellis_vault_controlled_document_form" model="ir.ui.view">
         <field name="name">trellis.vault.controlled.document.form</field>
         <field name="model">trellis.vault.controlled.document</field>
@@ -38,12 +40,14 @@
                         <field name="effective_date" attrs="{'readonly': [('is_locked','=',True)]}"/>
                         <field name="owner_id" attrs="{'readonly': [('is_locked','=',True)]}"/>
                     </group>
+
                     <group string="Related">
                         <button name="action_view_training_records" type="object"
                                 class="oe_stat_button" icon="fa-users">
                             <field name="training_record_count" widget="statinfo" string="Training Records"/>
                         </button>
                     </group>
+
                     <notebook>
                         <page string="Chatter">
                             <div class="oe_chatter"/>
@@ -54,6 +58,7 @@
         </field>
     </record>
 
+    <!-- Action for menus.xml -->
     <record id="action_trellis_vault_controlled_document" model="ir.actions.act_window">
         <field name="name">Controlled Documents</field>
         <field name="res_model">trellis.vault.controlled.document</field>
