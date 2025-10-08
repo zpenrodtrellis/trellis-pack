@@ -28,8 +28,7 @@
         <field name="model">trellis.vault.controlled.document</field>
         <field name="arch" type="xml">
             <form string="Controlled Document">
-                
-                <!-- ✅ Header for state buttons -->
+                <!-- Header -->
                 <header>
                     <button name="action_reset_to_draft" type="object" string="Set Draft"
                             invisible="state == 'draft'"/>
@@ -51,7 +50,7 @@
                     </group>
                 </sheet>
 
-                <!-- ✅ Chatter for attachments & audit trail -->
+                <!-- ✅ Explicit chatter zone -->
                 <div class="oe_chatter" options="{'open_chatter': True}"/>
             </form>
         </field>
