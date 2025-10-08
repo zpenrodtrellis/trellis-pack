@@ -1,11 +1,12 @@
 <odoo>
+    <!-- Safest placement for Odoo 19 chatter -->
     <record id="view_trellis_vault_controlled_document_chatter" model="ir.ui.view">
         <field name="name">trellis.vault.controlled.document.form.chatter</field>
         <field name="model">trellis.vault.controlled.document</field>
         <field name="inherit_id" ref="trellis_vault.view_trellis_vault_controlled_document_form"/>
         <field name="arch" type="xml">
-            <!-- Works even if form has nested sheets -->
-            <xpath expr="//sheet" position="after">
+            <!-- Put chatter *after* the entire form sheet wrapper -->
+            <xpath expr="//form" position="inside">
                 <div class="oe_chatter" options="{'open_chatter': True}"/>
             </xpath>
         </field>
