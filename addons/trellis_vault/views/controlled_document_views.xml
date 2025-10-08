@@ -37,7 +37,6 @@
                         <field name="state"/>
                     </group>
                 </sheet>
-            </form>
-        </field>
-    </record>
-</odoo>
+
+                <!-- ✅ Added: native chatter for attachments + audit log -->
+                <div
