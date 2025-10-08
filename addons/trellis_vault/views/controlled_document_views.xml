@@ -32,13 +32,14 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="revision"/>
+                        <field name="previous_version_id"/>
                         <field name="effective_date"/>
                         <field name="owner_id"/>
-                        <field name="state"/>
+                        <field name="state" readonly="1"/>
                     </group>
                 </sheet>
 
-                <!-- ✅ Correctly closed chatter div for attachments + audit log -->
+                <!-- ✅ Chatter: placed outside <sheet> but inside <form> -->
                 <div class="oe_chatter" options="{'open_chatter': True}"/>
             </form>
         </field>
