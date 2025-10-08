@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Action: must exist before menus.xml -->
+    <!-- Action -->
     <record id="action_trellis_vault_controlled_document" model="ir.actions.act_window">
         <field name="name">Controlled Documents</field>
         <field name="res_model">trellis.vault.controlled.document</field>
@@ -17,6 +17,7 @@
                 <field name="revision"/>
                 <field name="state"/>
                 <field name="effective_date"/>
+                <field name="owner_id"/>
             </list>
         </field>
     </record>
@@ -27,6 +28,18 @@
         <field name="model">trellis.vault.controlled.document</field>
         <field name="arch" type="xml">
             <form string="Controlled Document">
+                
+                <!-- ✅ Header for state buttons -->
+                <header>
+                    <button name="action_reset_to_draft" type="object" string="Set Draft"
+                            invisible="state == 'draft'"/>
+                    <button name="action_activate" type="object" string="Activate"
+                            invisible="state != 'draft'"/>
+                    <button name="action_archive" type="object" string="Archive"
+                            invisible="state == 'archived'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,archived"/>
+                </header>
+
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -35,11 +48,10 @@
                         <field name="previous_version_id"/>
                         <field name="effective_date"/>
                         <field name="owner_id"/>
-                        <field name="state" readonly="1"/>
                     </group>
                 </sheet>
 
-                <!-- ✅ Chatter: placed outside <sheet> but inside <form> -->
+                <!-- ✅ Chatter for attachments & audit trail -->
                 <div class="oe_chatter" options="{'open_chatter': True}"/>
             </form>
         </field>
