@@ -11,13 +11,13 @@
         <field name="name">trellis.vault.controlled.document.list</field>
         <field name="model">trellis.vault.controlled.document</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="revision"/>
                 <field name="state"/>
                 <field name="effective_date"/>
-            </tree>
+            </list>
         </field>
     </record>
 
