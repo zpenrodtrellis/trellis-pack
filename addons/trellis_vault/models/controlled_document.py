@@ -27,9 +27,13 @@ class TrellisVaultControlledDocument(models.Model):
     )
 
     is_locked = fields.Boolean(compute="_compute_is_locked", store=False)
-
-    # Smart button: related training records
     training_record_count = fields.Integer(compute="_compute_training_record_count")
+
+    # ✅ Add this line — required for attachments to appear
+    attachment_ids = fields.Many2many(
+        "ir.attachment", "trellis_doc_ir_attachments_rel", "doc_id", "attachment_id",
+        string="Attachments"
+    )
 
     @api.depends("state")
     def _compute_is_locked(self):
@@ -55,7 +59,6 @@ class TrellisVaultControlledDocument(models.Model):
             "context": {"default_document_id": self.id},
         }
 
-    # State transitions (KISS)
     def action_activate(self):
         for rec in self:
             rec.state = "active"
