@@ -72,3 +72,41 @@ class TrellisVaultControlledDocument(models.Model):
     def action_reset_to_draft(self):
         for rec in self:
             rec.state = "draft"
+
+
+compliance_log_ids = fields.One2many(
+    "trellis.vault.compliance.log", "document_id", string="Compliance Logs"
+)
+
+# ADD this helper anywhere in the class
+def _log_compliance(self, action: str, **kw):
+    for rec in self:
+        self.env["trellis.vault.compliance.log"].sudo().create({
+            "document_id": rec.id,
+            "action": action,
+            "old_state": kw.get("old_state"),
+            "new_state": kw.get("new_state"),
+            "attachment_id": kw.get("attachment_id"),
+            "note": kw.get("note"),
+        })
+
+# UPDATE your three state methods like so:
+def action_activate(self):
+    for rec in self:
+        old = rec.state
+        rec.state = "active"
+        if not rec.effective_date:
+            rec.effective_date = fields.Date.context_today(self)
+        rec._log_compliance("state_change", old_state=old, new_state="active", note="Activated")
+
+def action_archive(self):
+    for rec in self:
+        old = rec.state
+        rec.state = "archived"
+        rec._log_compliance("state_change", old_state=old, new_state="archived", note="Archived")
+
+def action_reset_to_draft(self):
+    for rec in self:
+        old = rec.state
+        rec.state = "draft"
+        rec._log_compliance("state_change", old_state=old, new_state="draft", note="Reset to Draft")

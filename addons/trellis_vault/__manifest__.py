@@ -12,6 +12,7 @@
         "views/controlled_document_views.xml",
         "views/training_record_views.xml",
         "views/menus.xml",
+        "views/compliance_log_views.xml",
     ],
     "installable": True,
     "application": False,
