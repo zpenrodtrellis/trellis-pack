@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_trellis_vault_root" name="Trellis Vault" sequence="10"/>
+
+    <!-- Master Data -->
+    <menuitem id="menu_trellis_vault_master" name="Master Data"
+              parent="menu_trellis_vault_root" sequence="10"/>
+
+    <menuitem id="menu_trellis_vault_strain" name="Strains"
+              parent="menu_trellis_vault_master"
+              action="action_trellis_vault_strain" sequence="10"/>
+
+    <menuitem id="menu_trellis_vault_mother_tag" name="Mother Tags"
+              parent="menu_trellis_vault_master"
+              action="action_trellis_vault_mother_tag" sequence="20"/>
+
+    <!-- Quality & Docs -->
+    <menuitem id="menu_trellis_vault_quality"
+              name="Quality &amp; Docs"
+              parent="menu_trellis_vault_root"
+              sequence="30"/>
+
+    <menuitem id="menu_trellis_vault_controlled_documents"
+              name="Controlled Documents"
+              parent="menu_trellis_vault_quality"
+              action="action_trellis_vault_controlled_document"
+              sequence="10"/>
+
+    <menuitem id="menu_trellis_vault_training_records"
+              name="Training Records"
+              parent="menu_trellis_vault_quality"
+              action="action_trellis_vault_training_record"
+              sequence="20"/>
+</odoo>

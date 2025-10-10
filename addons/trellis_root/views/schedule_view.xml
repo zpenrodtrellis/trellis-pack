@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Master Schedule List -->
+    <record id="view_trellis_schedule_list" model="ir.ui.view">
+        <field name="name">trellis.schedule.list</field>
+        <field name="model">trellis.schedule</field>
+        <field name="arch" type="xml">
+            <list string="Master Schedule">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="cycle_type"/>
+                <field name="qty"/>
+                <field name="start_date"/>
+                <field name="veg_date"/>
+                <field name="flower_date"/>
+                <field name="harvest_date"/>
+                <field name="dry_date"/>
+                <field name="buck_start_date"/>
+                <field name="buck_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Master Schedule Form -->
+    <record id="view_trellis_schedule_form" model="ir.ui.view">
+        <field name="name">trellis.schedule.form</field>
+        <field name="model">trellis.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Master Schedule">
+                <header>
+                    <button name="action_release_mo"
+                            type="object"
+                            string="Release MO"
+                            class="btn-primary"
+                            invisible="state == 'released'"
+                            context="{'reload_after_button': True}"/>
+                </header>
+                <sheet>
+                    <!-- Smart badge -->
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="open_mo"
+                                class="oe_stat_button"
+                                icon="fa-industry"
+                                invisible="mo_id == False">
+                            <field name="mo_id" string="Manufacturing Order" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="product_id"/>
+                        <field name="cycle_type"/>
+                        <field name="qty"/>
+                        <field name="start_date"/>
+                        <field name="state"/>
+                        <field name="mo_id" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="veg_date" readonly="1"/>
+                        <field name="flower_date" readonly="1"/>
+                        <field name="harvest_date" readonly="1"/>
+                        <field name="dry_date" readonly="1"/>
+                        <field name="buck_start_date" readonly="1"/>
+                        <field name="buck_date" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Stage Events">
+                            <field name="stage_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="stage"/>
+                                    <field name="date_start"/>
+                                    <field name="date_stop"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Master Schedule Search -->
+    <record id="view_trellis_schedule_search" model="ir.ui.view">
+        <field name="name">trellis.schedule.search</field>
+        <field name="model">trellis.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Search Master Schedule">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="cycle_type"/>
+                <field name="state"/>
+                <filter string="Production" name="filter_production" domain="[('cycle_type','=','production')]"/>
+                <filter string="Mother" name="filter_mother" domain="[('cycle_type','=','mother')]"/>
+                <filter string="Planned" name="filter_planned" domain="[('state','=','planned')]"/>
+                <filter string="Released" name="filter_released" domain="[('state','=','released')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Stage Events Calendar -->
+    <record id="view_trellis_schedule_stage_calendar" model="ir.ui.view">
+        <field name="name">trellis.schedule.stage.calendar</field>
+        <field name="model">trellis.schedule.stage</field>
+        <field name="arch" type="xml">
+            <calendar string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="color">
+                <field name="name"/>
+                <field name="stage"/>
+                <field name="cycle_type"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Stage Events Gantt -->
+    <record id="view_trellis_schedule_stage_gantt" model="ir.ui.view">
+        <field name="name">trellis.schedule.stage.gantt</field>
+        <field name="model">trellis.schedule.stage</field>
+        <field name="arch" type="xml">
+            <gantt string="Stage Schedule" date_start="date_start" date_stop="date_stop" color="color">
+                <field name="name"/>
+                <field name="stage"/>
+                <field name="cycle_type"/>
+            </gantt>
+        </field>
+    </record>
+
+    <!-- Master Schedule Action -->
+    <record id="action_trellis_schedule" model="ir.actions.act_window">
+        <field name="name">Master Schedule</field>
+        <field name="res_model">trellis.schedule</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_trellis_schedule_search"/>
+    </record>
+
+    <!-- Stage Events Action -->
+    <record id="action_trellis_schedule_stage" model="ir.actions.act_window">
+        <field name="name">Stage Events</field>
+        <field name="res_model">trellis.schedule.stage</field>
+        <field name="view_mode">calendar,gantt,list</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_trellis_root_root" name="Trellis Root"/>
+    <menuitem id="menu_trellis_schedule" name="Master Schedule"
+              parent="menu_trellis_root_root" action="action_trellis_schedule"/>
+    <menuitem id="menu_trellis_schedule_stage" name="Stage Events"
+              parent="menu_trellis_root_root" action="action_trellis_schedule_stage"/>
+</odoo>

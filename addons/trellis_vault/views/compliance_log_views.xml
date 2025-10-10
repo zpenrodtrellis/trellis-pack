@@ -1,0 +1,60 @@
+<odoo>
+    <!-- Window Action -->
+    <record id="action_compliance_logs" model="ir.actions.act_window">
+        <field name="name">Compliance Logs</field>
+        <field name="res_model">trellis.vault.compliance.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Auditor-ready record of controlled-document and training compliance events.</p>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_compliance_log_list" model="ir.ui.view">
+        <field name="name">trellis.vault.compliance.log.list</field>
+        <field name="model">trellis.vault.compliance.log</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="create_date"/>
+                <field name="user_id"/>
+                <field name="document_id"/>
+                <field name="action"/>
+                <field name="old_state"/>
+                <field name="new_state"/>
+                <field name="note"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_compliance_log_form" model="ir.ui.view">
+        <field name="name">trellis.vault.compliance.log.form</field>
+        <field name="model">trellis.vault.compliance.log</field>
+        <field name="arch" type="xml">
+            <form string="Compliance Log Entry">
+                <sheet>
+                    <group>
+                        <field name="document_id"/>
+                        <field name="user_id" readonly="1"/>
+                        <field name="action"/>
+                        <field name="old_state"/>
+                        <field name="new_state"/>
+                        <field name="note"/>
+                        <field name="attachment_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu (under Quality & Docs) -->
+    <menuitem id="menu_compliance_logs"
+              name="Compliance Logs"
+              parent="menu_trellis_vault_quality_docs"
+              action="action_compliance_logs"
+              sequence="30"/>
+</odoo>
