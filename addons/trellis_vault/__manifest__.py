@@ -8,19 +8,17 @@
     "data": [
         "security/ir.model.access.csv",
 
-        # base models' views (no cross-refs)
+        # base model views
         "views/strain_views.xml",
         "views/mother_tag_views.xml",
 
-        # MENUS FIRST so children can attach
-        "views/menus.xml",
-
-        # define Compliance Log action BEFORE form smart-button references it
-        "views/compliance_log_views.xml",
-
-        # now forms that reference that action
+        # load all actions first (so menus can safely reference them)
         "views/controlled_document_views.xml",
         "views/training_record_views.xml",
+        "views/compliance_log_views.xml",
+
+        # finally load menu structure
+        "views/menus.xml",
     ],
     "installable": True,
     "application": False,
