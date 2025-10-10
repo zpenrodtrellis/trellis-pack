@@ -8,16 +8,18 @@
     "data": [
         "security/ir.model.access.csv",
 
-        # base model views
+        # base model views (no action refs)
         "views/strain_views.xml",
         "views/mother_tag_views.xml",
 
-        # load all actions first (so menus can safely reference them)
-        "views/controlled_document_views.xml",
-        "views/training_record_views.xml",
+        # make sure the Compliance Log action exists BEFORE any form uses it
         "views/compliance_log_views.xml",
 
-        # finally load menu structure
+        # now load forms that reference that action id
+        "views/controlled_document_views.xml",
+        "views/training_record_views.xml",
+
+        # menus always last
         "views/menus.xml",
     ],
     "installable": True,
