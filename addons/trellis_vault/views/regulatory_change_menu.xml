@@ -1,0 +1,7 @@
+<odoo>
+  <menuitem id="menu_regulatory_change"
+            name="Regulatory Change History"
+            parent="trellis_vault.menu_quality_docs_root"
+            action="action_regulatory_change"
+            sequence="60"/>
+</odoo>

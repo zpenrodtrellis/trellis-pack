@@ -1,0 +1,48 @@
+<odoo>
+  <!-- Single record -->
+  <template id="report_regulatory_change">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <div class="page">
+          <h2>Regulatory Change Record</h2>
+          <p><strong>Printed on:</strong> <t t-esc="format_datetime(fields.Datetime.now(), tz='UTC')"/> (UTC)</p>
+          <table class="table table-sm o_main_table">
+            <tr><th>Date</th><td><t t-esc="format_datetime(doc.date, tz='UTC')"/></td></tr>
+            <tr><th>User</th><td><t t-esc="doc.user_id.display_name"/></td></tr>
+            <tr><th>Action</th><td><t t-esc="dict(doc._fields['action_type'].selection).get(doc.action_type)"/></td></tr>
+            <tr><th>Related</th><td><t t-esc="doc.related_ref.display_name if doc.related_ref else ''"/></td></tr>
+            <tr><th>Changed Fields</th><td><t t-esc="doc.changed_fields or ''"/></td></tr>
+          </table>
+
+          <h4>Old Values (JSON)</h4>
+          <pre><t t-esc="doc.old_values or ''"/></pre>
+
+          <h4>New Values (JSON)</h4>
+          <pre><t t-esc="doc.new_values or ''"/></pre>
+
+          <h4>Note</h4>
+          <p><t t-esc="doc.note or ''"/></p>
+
+          <div class="text-center" style="margin-top: 24px;">
+            Page <span class="page"/> / <span class="topage"/>
+          </div>
+        </div>
+      </t>
+    </t>
+  </template>
+
+  <!-- Batch = just re-use the single template per record -->
+  <template id="report_regulatory_change_batch">
+    <t t-call="web.html_container">
+      <div class="page">
+        <h2>Regulatory Change History (Batch)</h2>
+        <p><strong>Printed on:</strong> <t t-esc="format_datetime(fields.Datetime.now(), tz='UTC')"/> (UTC)</p>
+      </div>
+      <t t-foreach="docs" t-as="doc">
+        <t t-call="trellis_vault.report_regulatory_change">
+          <t t-set="docs" t-value="[doc]"/>
+        </t>
+      </t>
+    </t>
+  </template>
+</odoo>

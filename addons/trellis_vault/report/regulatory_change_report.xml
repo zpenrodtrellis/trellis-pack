@@ -1,0 +1,19 @@
+<odoo>
+  <report
+    id="regulatory_change_report_single"
+    model="trellis.vault.regulatory.change"
+    string="Regulatory Change Record"
+    report_type="qweb-pdf"
+    name="trellis_vault.report_regulatory_change"
+    file="trellis_vault.report_regulatory_change"
+    print_report_name="'RegChange-' + str(object.id)"/>
+
+  <report
+    id="regulatory_change_report_batch"
+    model="trellis.vault.regulatory.change"
+    string="Regulatory Change History (Batch)"
+    report_type="qweb-pdf"
+    name="trellis_vault.report_regulatory_change_batch"
+    file="trellis_vault.report_regulatory_change_batch"
+    print_report_name="'RegChangeBatch-' + str(context.get('active_ids'))"/>
+</odoo>

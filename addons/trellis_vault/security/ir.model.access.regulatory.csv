@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reg_change_user,reg_change_user,model_trellis_vault_regulatory_change,trellis_vault.group_quality_user,1,0,0,0
+access_reg_change_manager,reg_change_manager,model_trellis_vault_regulatory_change,trellis_vault.group_quality_manager,1,1,1,0

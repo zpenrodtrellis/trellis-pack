@@ -1,0 +1,12 @@
+<odoo>
+  <record id="group_quality_user" model="res.groups">
+    <field name="name">Quality User</field>
+    <field name="category_id" ref="base.module_category_hidden"/>
+  </record>
+
+  <record id="group_quality_manager" model="res.groups">
+    <field name="name">Quality Manager</field>
+    <field name="implied_ids" eval="[(4, ref('trellis_vault.group_quality_user'))]"/>
+    <field name="category_id" ref="base.module_category_hidden"/>
+  </record>
+</odoo>
